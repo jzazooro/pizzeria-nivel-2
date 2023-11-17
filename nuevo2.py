@@ -114,7 +114,7 @@ class Pizza(PizzaBuilder):
         print("2 - Para llevar")
         opcion = input("Opción: ")
         if opcion == '1':
-            self.presentacion = "Para tomar aquí"
+            self.presentacion = "Para tomar aqui"
         elif opcion == '2':
             self.presentacion = "Para llevar"
 
@@ -186,11 +186,10 @@ if __name__ == "__main__":
     print("Presentación:", pizza[4])
     print("Tamaño:", pizza[5])
 
-    if not os.path.isfile('pizza.csv'):
-        csv_builder.crear_csv()
-
     if not os.path.isfile('pedidos.csv'):
         pedido_builder.crear_csv()
 
     csv_builder.añadir_pizza(pizza)
     pedido_builder.añadir_pedido("Cliente1", ', '.join(pizza))
+
+    # borrar el csv pizza.csv
