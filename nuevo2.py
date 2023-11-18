@@ -31,17 +31,17 @@ class Pizza(PizzaBuilder):
     def __init__(self):
         self.reset()
         
-    def reset(self):
-        self.masa = ""
-        self.salsa = ""
+    def reset(self):    
         self.tamano = ""
+        self.masa = ""
         self.ingredientes = []
+        self.salsa = ""
         self.tecnica = ""
         self.presentacion = ""
     
     @property
     def pizza(self):
-        pizza = [self.masa, self.salsa, ', '.join(self.ingredientes), self.tecnica, self.presentacion, self.tamano]
+        pizza = [self.tamano, self.masa, ', '.join(self.ingredientes), self.salsa, self.tecnica, self.presentacion]
         self.reset()
         return pizza
     
@@ -122,7 +122,7 @@ class PedidoPizzaCSVBuilder:
     def crear_csv(self):
         with open('pedidos_pizza.csv', 'w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(["Cliente", "Masa", "Salsa", "Ingredientes", "Tecnica de cocción", "Presentacion", "Tamano"])
+            writer.writerow(["Cliente", "Tamano", "Masa", "Ingredientes", "Salsa", "Tecnica de coccion", "Presentacion"])
         file.close()
 
     def añadir_pedido(self, cliente, pizza):
@@ -136,12 +136,12 @@ class PizzaDirector:
         self._builder = builder
     
     def crear_pizza(self):
+        self._builder.crear_tamano()
         self._builder.crear_masa()
-        self._builder.crear_salsa()
         self._builder.crear_ingredientes()
+        self._builder.crear_salsa()
         self._builder.crear_tecnica()
         self._builder.crear_presentacion()
-        self._builder.crear_tamano()
 
     @property
     def builder(self):
@@ -178,12 +178,12 @@ if __name__ == "__main__":
 
     print("¡Tu pizza está lista!")
     print("Detalles de la pizza:")
-    print("Masa:", pizza[0])
-    print("Salsa:", pizza[1])
+    print("Tamaño:", pizza[0])
+    print("Masa:", pizza[1])
     print("Ingredientes:", pizza[2])
-    print("Técnica de cocción:", pizza[3])
-    print("Presentación:", pizza[4])
-    print("Tamaño:", pizza[5])
+    print("Salsa:", pizza[3])
+    print("Técnica de cocción:", pizza[4])
+    print("Presentación:", pizza[5])
 
     if not os.path.isfile('pedidos_pizza.csv'):
         pedido_builder.crear_csv()
