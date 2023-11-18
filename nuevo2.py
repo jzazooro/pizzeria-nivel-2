@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import csv
 import os.path
 
+
 class PizzaBuilder(ABC):
     @abstractmethod
     def crear_masa(self):
@@ -150,19 +151,6 @@ class PizzaDirector:
     @builder.setter
     def builder(self, builder):
         self._builder = builder
-
-class PedidoCSVBuilder:
-    def crear_csv(self):
-        with open('pedidos.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Cliente", "Pedido"])
-        file.close()
-
-    def añadir_pedido(self, cliente, pedido):
-        with open('pedidos.csv', 'a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([cliente, pedido])
-        file.close()
 
 # ... (código anterior)
 
