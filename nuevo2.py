@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import csv
 import os.path
 
-
 class PizzaBuilder(ABC):
     @abstractmethod
     def crear_masa(self):
@@ -45,45 +44,65 @@ class Pizza(PizzaBuilder):
         pizza = [self.tamano, self.masa, ', '.join(self.ingredientes), self.salsa, self.tecnica, self.presentacion]
         self.reset()
         return pizza
-    
+
     def crear_masa(self):
-        print("Elige el tipo de masa:")
-        print("1 - Clasica")
-        print("2 - Fina")
-        print("3 - Con queso")
-        opcion = input("Opcion: ")
-        if opcion == '1':
-            self.masa = "Clasica"
-        elif opcion == '2':
-            self.masa = "Fina"
-        elif opcion == '3':
-            self.masa = "Con queso"
+        while True:
+            print("Elige el tipo de masa:")
+            print("1 - Clasica")
+            print("2 - Fina")
+            print("3 - Con queso")
+            opcion = input("Opcion: ")
+            if opcion == '1':
+                self.masa = "Clasica"
+                break
+            elif opcion == '2':
+                self.masa = "Fina"
+                break
+            elif opcion == '3':
+                self.masa = "Con queso"
+                break
+            else:
+                print("Por favor, elige una opcion valida (1, 2, o 3)")
+
 
     def crear_tamano(self):
-        print("Elige el tamaño:")
-        print("1 - Familiar")
-        print("2 - Normal")
-        print("3 - Pequeña")
-        opcion = input("Opcion: ")
-        if opcion == '1':
-            self.tamano = "Familiar"
-        elif opcion == '2':
-            self.tamano = "Normal"
-        elif opcion == '3':
-            self.tamano = "Pequeña"
+        while True:
+            print("Elige el tamano:")
+            print("1 - Familiar")
+            print("2 - Normal")
+            print("3 - Pequena")
+            opcion = input("Opcion: ")
+            if opcion == '1':
+                self.tamano = "Familiar"
+                break
+            elif opcion == '2':
+                self.tamano = "Normal"
+                break
+            elif opcion == '3':
+                self.tamano = "Pequena"
+                break
+            else:
+                print("Por favor, elige una opción valida (1, 2, o 3)")
 
     def crear_salsa(self):
-        print("Elige el tipo de salsa:")
-        print("1 - Barbacoa")
-        print("2 - Picante")
-        print("3 - Carbonara")
-        opcion = input("Opcion: ")
-        if opcion == '1':
-            self.salsa = "Barbacoa"
-        elif opcion == '2':
-            self.salsa = "Picante"
-        elif opcion == '3':
-            self.salsa = "Carbonara"
+        while True:
+            print("Elige el tipo de salsa:")
+            print("1 - Barbacoa")
+            print("2 - Picante")
+            print("3 - Carbonara")
+            opcion = input("Opcion: ")
+            if opcion == '1':
+                self.salsa = "Barbacoa"
+                break
+            elif opcion == '2':
+                self.salsa = "Picante"
+                break
+            elif opcion == '3':
+                self.salsa = "Carbonara"
+                break
+            else:
+                print("Por favor, elige una opcion valida (1, 2, o 3)")
+
 
     def crear_ingredientes(self):
         print("Elige los ingredientes para tu pizza (ingresa 'listo' cuando hayas terminado):")
@@ -100,24 +119,34 @@ class Pizza(PizzaBuilder):
                 print("Ingrediente no disponible. Elige otro.")
 
     def crear_tecnica(self):
-        print("Elige la tecnica de coccion:")
-        print("1 - Horno")
-        print("2 - Microondas")
-        opcion = input("Opcion: ")
-        if opcion == '1':
-            self.tecnica = "Horno"
-        elif opcion == '2':
-            self.tecnica = "Microondas"
-    
+        while True:
+            print("Elige la tecnica de coccion:")
+            print("1 - Horno")
+            print("2 - Microondas")
+            opcion = input("Opcion: ")
+            if opcion == '1':
+                self.tecnica = "Horno"
+                break
+            elif opcion == '2':
+                self.tecnica = "Microondas"
+                break
+            else:
+                print("Por favor, elige una opción valida (1 o 2)")
+
     def crear_presentacion(self):
-        print("Elige la presentacion:")
-        print("1 - Para tomar aqui")
-        print("2 - Para llevar")
-        opcion = input("Opcion: ")
-        if opcion == '1':
-            self.presentacion = "Para tomar aqui"
-        elif opcion == '2':
-            self.presentacion = "Para llevar"
+        while True:
+            print("Elige la presentacion:")
+            print("1 - Para tomar aqui")
+            print("2 - Para llevar")
+            opcion = input("Opcion: ")
+            if opcion == '1':
+                self.presentacion = "Para tomar aqui"
+                break
+            elif opcion == '2':
+                self.presentacion = "Para llevar"
+                break
+            else:
+                print("Por favor, elige una opción valida (1 o 2)")
 
 class PedidoPizzaCSVBuilder:
     def crear_csv(self):
@@ -152,28 +181,19 @@ class PizzaDirector:
     def builder(self, builder):
         self._builder = builder
 
-# ... (código anterior)
-
-if __name__ == "__main__":
-    director = PizzaDirector(Pizza())
-    builder = director.builder
-
-    pedido_builder = PedidoPizzaCSVBuilder()
-
-    director.crear_pizza()
-
-    pizza = builder.pizza
-
-    print("¡Tu pizza está lista!")
-    print("Detalles de la pizza:")
-    print("Tamaño:", pizza[0])
-    print("Masa:", pizza[1])
-    print("Ingredientes:", pizza[2])
-    print("Salsa:", pizza[3])
-    print("Técnica de cocción:", pizza[4])
-    print("Presentación:", pizza[5])
-
-    if not os.path.isfile('pedidos_pizza.csv'):
-        pedido_builder.crear_csv()
-
-    pedido_builder.añadir_pedido("Cliente1", pizza)
+director = PizzaDirector(Pizza())
+builder = director.builder
+pedido_builder = PedidoPizzaCSVBuilder()
+director.crear_pizza()
+pizza = builder.pizza
+print("¡Tu pizza está lista!")
+print("Detalles de la pizza:")
+print("Tamano:", pizza[0])
+print("Masa:", pizza[1])
+print("Ingredientes:", pizza[2])
+print("Salsa:", pizza[3])
+print("Tecnica de coccion:", pizza[4])
+print("Presentacion:", pizza[5])
+if not os.path.isfile('pedidos_pizza.csv'):
+    pedido_builder.crear_csv()
+pedido_builder.añadir_pedido("cliente1", pizza)

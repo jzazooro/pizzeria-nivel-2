@@ -59,6 +59,3 @@ def iniciar_sesion_o_registrar():
     else:
         print("Opción no válida. Por favor, responde 'sí' o 'no'.")
         iniciar_sesion_o_registrar()
-
-# Iniciar el proceso de inicio de sesión o registro
-iniciar_sesion_o_registrar()
