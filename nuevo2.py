@@ -47,10 +47,10 @@ class Pizza(PizzaBuilder):
     
     def crear_masa(self):
         print("Elige el tipo de masa:")
-        print("1 - Clásica")
+        print("1 - Clasica")
         print("2 - Fina")
         print("3 - Con queso")
-        opcion = input("Opción: ")
+        opcion = input("Opcion: ")
         if opcion == '1':
             self.masa = "Clasica"
         elif opcion == '2':
@@ -63,7 +63,7 @@ class Pizza(PizzaBuilder):
         print("1 - Familiar")
         print("2 - Normal")
         print("3 - Pequeña")
-        opcion = input("Opción: ")
+        opcion = input("Opcion: ")
         if opcion == '1':
             self.tamano = "Familiar"
         elif opcion == '2':
@@ -76,7 +76,7 @@ class Pizza(PizzaBuilder):
         print("1 - Barbacoa")
         print("2 - Picante")
         print("3 - Carbonara")
-        opcion = input("Opción: ")
+        opcion = input("Opcion: ")
         if opcion == '1':
             self.salsa = "Barbacoa"
         elif opcion == '2':
@@ -86,7 +86,7 @@ class Pizza(PizzaBuilder):
 
     def crear_ingredientes(self):
         print("Elige los ingredientes para tu pizza (ingresa 'listo' cuando hayas terminado):")
-        ingredientes_disponibles = ["Queso", "Pepperoni", "Champiñones", "Jamon", "Pimientos", "Cebolla", "Aceitunas"]
+        ingredientes_disponibles = ["Queso", "Pepperoni", "Champinones", "Jamon", "Pimientos", "Cebolla", "Aceitunas"]
         while True:
             print(f"Ingredientes disponibles: {', '.join(ingredientes_disponibles)}")
             ingrediente = input("Ingrediente: ")
@@ -99,36 +99,36 @@ class Pizza(PizzaBuilder):
                 print("Ingrediente no disponible. Elige otro.")
 
     def crear_tecnica(self):
-        print("Elige la técnica de cocción:")
+        print("Elige la tecnica de coccion:")
         print("1 - Horno")
         print("2 - Microondas")
-        opcion = input("Opción: ")
+        opcion = input("Opcion: ")
         if opcion == '1':
             self.tecnica = "Horno"
         elif opcion == '2':
             self.tecnica = "Microondas"
     
     def crear_presentacion(self):
-        print("Elige la presentación:")
+        print("Elige la presentacion:")
         print("1 - Para tomar aqui")
         print("2 - Para llevar")
-        opcion = input("Opción: ")
+        opcion = input("Opcion: ")
         if opcion == '1':
             self.presentacion = "Para tomar aqui"
         elif opcion == '2':
             self.presentacion = "Para llevar"
 
-class CSVBuilder:
+class PedidoPizzaCSVBuilder:
     def crear_csv(self):
-        with open('pizza.csv', 'w', newline='') as file:
+        with open('pedidos_pizza.csv', 'w', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(["Masa", "Salsa", "Ingredientes", "Técnica de cocción", "Presentación", "Tamaño"])
+            writer.writerow(["Cliente", "Masa", "Salsa", "Ingredientes", "Tecnica de cocción", "Presentacion", "Tamano"])
         file.close()
 
-    def añadir_pizza(self, pizza):
-        with open('pizza.csv', 'a', newline='') as file:
+    def añadir_pedido(self, cliente, pizza):
+        with open('pedidos_pizza.csv', 'a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow(pizza)
+            writer.writerow([cliente] + pizza)
         file.close()
 
 class PizzaDirector:
@@ -170,8 +170,7 @@ if __name__ == "__main__":
     director = PizzaDirector(Pizza())
     builder = director.builder
 
-    csv_builder = CSVBuilder()
-    pedido_builder = PedidoCSVBuilder()
+    pedido_builder = PedidoPizzaCSVBuilder()
 
     director.crear_pizza()
 
@@ -186,10 +185,7 @@ if __name__ == "__main__":
     print("Presentación:", pizza[4])
     print("Tamaño:", pizza[5])
 
-    if not os.path.isfile('pedidos.csv'):
+    if not os.path.isfile('pedidos_pizza.csv'):
         pedido_builder.crear_csv()
 
-    csv_builder.añadir_pizza(pizza)
-    pedido_builder.añadir_pedido("Cliente1", ', '.join(pizza))
-
-    # borrar el csv pizza.csv
+    pedido_builder.añadir_pedido("Cliente1", pizza)
