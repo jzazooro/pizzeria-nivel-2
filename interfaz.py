@@ -75,7 +75,7 @@ def crear_interfaz():
     root.title("Registro e Inicio de Sesión")
 
     image = Image.open("foto1.jpg")  # Cambia "nombre_de_la_imagen.jpg" por tu ruta de imagen
-    image = image.resize((800, 600), Image.ANTIALIAS)  # Ajusta el tamaño según tus preferencias
+    image = image.resize((1600, 800), Image.ANTIALIAS)  # Ajusta el tamaño según tus preferencias
     photo = ImageTk.PhotoImage(image)
 
     # Mostrar la imagen como fondo en un label
