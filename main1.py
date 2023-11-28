@@ -1,4 +1,5 @@
-from nuevo import *
+from ejercicio1_1 import *
+from ejercicio1_2 import *
 import csv
 import os.path
 from abc import ABC, abstractmethod
@@ -57,13 +58,14 @@ def main():
         print("Elige tu entrante:")
         seleccion_entrante = obtener_seleccion(entrantes)
         
-        def ordenarcsv(correo):
-            with open('complementos.csv', mode='w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(['Correo', 'Bebida', 'Postre', 'Entrante'])
-                writer.writerow([correo, seleccion_bebida, seleccion_postre, seleccion_entrante])
-            ordenarcsv("cliente1")
-        print("Selecciones guardadas en 'complementos.csv'")
+        nueva_fila = ['elemento1', 'elemento2', 'elemento3', 'elemento4']
+
+
+        nombre_archivo = 'complementos.csv'
+        with open(nombre_archivo, mode='a', newline='') as archivo_csv:
+            escritor_csv = csv.writer(archivo_csv)
+            escritor_csv.writerow(nueva_fila)
+
     except ValueError as e:
         print("Error: Ingresa un número válido.")
     

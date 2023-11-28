@@ -1,4 +1,3 @@
 Cliente, Tamanio, Masa, Ingredientes, Salsa, Tecnica de coccion, Presentacion
-cliente1,Familiar,Clasica,Queso,Barbacoa,Horno,Para tomar aqui
-cliente1,Familiar,Fina,Pepperoni,Carbonara,Microondas,Para llevar
-cliente1,Familiar,Clasica,Queso,Barbacoa,Microondas,Para llevar
+cliente1,Familiar,Clasica,,Barbacoa,Horno,Para tomar aqui
+cliente1,Familiar,Clasica,Queso,Picante,Microondas,Para llevar
