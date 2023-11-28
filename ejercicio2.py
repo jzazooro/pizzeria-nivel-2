@@ -96,8 +96,8 @@ class Proxy(InterfazServicio):
     def permitir_acceso(self, usuario, elemento, accion):
         if usuario in self.usuarios_autorizados:
             self.registrar_acceso(elemento, accion)
-            print(f"Acceso permitido a {elemento.nombre}. Registros: {self.get_registros_acceso(elemento)}")
+            print("Pasa a: ", elemento.nombre, "Registros: ", self.get_registros_acceso(elemento))
             return True
         else:
-            print("Acceso denegado")
+            print("Por aqui no pasas...")
             return False
