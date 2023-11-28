@@ -57,6 +57,23 @@ def mostrar_opciones(opciones: Dict[str, str]) -> None:
     for i, opcion in enumerate(opciones, start=1):
         print(f"{i}. {opcion}")
 
+def mostrar_opciones(opciones: Dict[str, str]) -> None:
+    for i, opcion in enumerate(opciones, start=1):
+        print(f"{i}. {opcion}")
+
+def seleccion_valida(opcion: int, opciones: Dict[str, str]) -> bool:
+    return 1 <= opcion <= len(opciones)
+
+def obtener_seleccion(opciones: Dict[str, str]) -> str:
+    while True:
+        mostrar_opciones(opciones)
+        opcion = input("Ingresa el número correspondiente: ")
+        if opcion.isdigit():
+            opcion = int(opcion)
+            if seleccion_valida(opcion, opciones):
+                return list(opciones.values())[opcion - 1]
+        print("Error: Ingresa un número válido.")
+
 try:
     bebidas = {
         "Aguita refrescante": "Aguita refrescante",
@@ -66,9 +83,7 @@ try:
     }
 
     print("Elige tu bebida:")
-    mostrar_opciones(bebidas)
-    opcion_bebida = int(input("Ingresa el número correspondiente: "))
-    opcion_seleccionada_bebida = list(bebidas.values())[opcion_bebida - 1]
+    seleccion_bebida = obtener_seleccion(bebidas)
 
     postres = {
         "Banana split": "Banana split",
@@ -78,28 +93,24 @@ try:
     }
 
     print("Elige tu postre:")
-    mostrar_opciones(postres)
-    opcion_postre = int(input("Ingresa el número correspondiente: "))
-    opcion_seleccionada_postre = list(postres.values())[opcion_postre - 1]
+    seleccion_postre = obtener_seleccion(postres)
 
     entrantes = {
-        "Nachos guerrero": "Nachos guerrero",
+        "Nachos": "Nachos",
         "Enchilada": "Enchilada",
         "Taco": "Taco",
         "Nada": "Nada"
     }
 
     print("Elige tu entrante:")
-    mostrar_opciones(entrantes)
-    opcion_entrante = int(input("Ingresa el número correspondiente: "))
-    opcion_seleccionada_entrante = list(entrantes.values())[opcion_entrante - 1]
+    seleccion_entrante = obtener_seleccion(entrantes)
 
     # Guardar las selecciones en un archivo CSV
     with open('complementos.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Bebida', 'Postre', 'Entrante'])
-        writer.writerow([opcion_seleccionada_bebida, opcion_seleccionada_postre, opcion_seleccionada_entrante])
+        writer.writerow([seleccion_bebida, seleccion_postre, seleccion_entrante])
 
     print("Selecciones guardadas en 'complementos.csv'")
-except (ValueError, IndexError) as e:
+except ValueError as e:
     print("Error: Ingresa un número válido.")
