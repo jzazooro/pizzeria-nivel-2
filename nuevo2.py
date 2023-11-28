@@ -295,7 +295,7 @@ try:
     seleccion_postre = obtener_seleccion(postres)
 
     entrantes = {
-        "Nachos": "Nachos",
+        "Nachos guerrero": "Nachos guerrero",
         "Enchilada": "Enchilada",
         "Taco": "Taco",
         "Nada": "Nada"
@@ -307,8 +307,8 @@ try:
     # Guardar las selecciones en un archivo CSV
     with open('complementos.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Bebida', 'Postre', 'Entrante'])
-        writer.writerow([seleccion_bebida, seleccion_postre, seleccion_entrante])
+        writer.writerow(['Cliente', 'Bebida', 'Postre', 'Entrante'])
+        writer.writerow(['cliente1', seleccion_bebida, seleccion_postre, seleccion_entrante])
 
     print("Selecciones guardadas en 'complementos.csv'")
 except ValueError as e:
