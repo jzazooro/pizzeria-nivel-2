@@ -1,5 +1,4 @@
-from ejercicio1_1 import *
-from ejercicio1_2 import *
+from ejercicio1 import *
 import csv
 import os.path
 from abc import ABC, abstractmethod
