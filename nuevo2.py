@@ -306,10 +306,12 @@ try:
     seleccion_entrante = obtener_seleccion(entrantes)
 
     # Guardar las selecciones en un archivo CSV
-    with open('complementos.csv', mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(['Cliente', 'Bebida', 'Postre', 'Entrante'])
-        writer.writerow(['cliente1', seleccion_bebida, seleccion_postre, seleccion_entrante])
+    def ordenarcsv(correo):
+        with open('complementos.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['Correo', 'Bebida', 'Postre', 'Entrante'])
+            writer.writerow([correo, seleccion_bebida, seleccion_postre, seleccion_entrante])
+    ordenarcsv("cliente1")
 
     print("Selecciones guardadas en 'complementos.csv'")
 except ValueError as e:
