@@ -59,5 +59,18 @@ class Carpeta(Elemento):
         proxy.permitir_acceso(usuario, self, accion)
         for elemento in self.elementos:
             elemento.aceptar(usuario, accion, proxy)
-    
-    
+
+class InterfazUsuario:
+    def permitir_acceso(self, usuario, elemento, accion):
+        pass
+
+    def get_registros_acceso(self, elemento):
+        pass
+
+    def agregar_usuario_autorizado(self, usuario):
+        pass
+
+    def registrar_acceso(self, elemento, accion):
+        pass
+
+  
