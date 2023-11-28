@@ -29,7 +29,7 @@ def main():
     proxy_acceso.permitir_acceso("usuario2", enlace1, "lectura")
 
     print("Elementos restantes de la carpeta: ")
-    carpeta1.eliminar_elementos(enlace1)
+    carpeta1.eliminar_elemento(enlace1)
     for i in range(len(carpeta1.elementos)):
         print(carpeta1.elementos[i].nombre)
 
