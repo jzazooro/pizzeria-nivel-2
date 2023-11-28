@@ -17,4 +17,20 @@ class Elemento:
     
     def aceptar(self, usuario, accion, proxy):
         pass
+
+class Documento(Elemento):
+    def __init__(self, nombre, tipo, tamaño, contenido):
+        super().__init__(tipo, nombre, tamaño)
+        self.contenido=contenido
+
+    def get_contenido(self):
+        return self.contenido
+    
+    def modificar_contenido(self, nuevo_contenido):
+        self.contenido = nuevo_contenido
+    
+    def aceptar(self, usuario, accion, proxy):
+        proxy.permitir_acceso(usuario, self, accion)
+
+class Carpeta(Elemento):
     
