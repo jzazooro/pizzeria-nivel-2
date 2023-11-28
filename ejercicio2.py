@@ -20,7 +20,7 @@ class Elemento:
 
 class Documento(Elemento):
     def __init__(self, nombre, tipo, tamaño, contenido):
-        super().__init__(tipo, nombre, tamaño)
+        super().__init__(nombre, tipo, tamaño)
         self.contenido=contenido
 
     def get_contenido(self):
@@ -38,21 +38,21 @@ class Enlace(Elemento):
 
 class Carpeta(Elemento):
     def __init__(self, nombre):
-        super().__init__(nombre, "carpeta", 0)
+        super().__init__(nombre, "Carpeta", 0)
         self.elementos = []
 
-    def agregar_elementos(self, elemento):
+    def agregar_elemento(self, elemento):
         self.elementos.append(elemento)
 
-    def eliminar_elementos(self, elemento):
+    def eliminar_elemento(self, elemento):
         self.elementos.remove(elemento)
 
-    def get_elementos(self, nombre):
+    def get_elemento(self, nombre):
         for elemento in self.elementos:
-            if elemento.nombre() == nombre:
+            if elemento.nombre == nombre:
                 return elemento
     
-    def get_tamaño():
+    def get_tamaño(self):
         return sum(elemento.tamaño for elemento in self.elementos)
     
     def aceptar(self, usuario, accion, proxy):
@@ -84,7 +84,8 @@ class Proxy(InterfazServicio):
     def registrar_acceso(self, documento, accion):
         ahora = datetime.now()
         if documento.nombre not in self.registros_acceso:
-            self.registros_acceso[documento.nombre].append((accion, ahora))
+            self.registros_acceso[documento.nombre] = []
+        self.registros_acceso[documento.nombre].append((accion, ahora))
             
     def get_registros_acceso(self, documento):
         return self.registros_acceso.get(documento.nombre, [])
