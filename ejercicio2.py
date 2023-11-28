@@ -73,4 +73,27 @@ class InterfazUsuario:
     def registrar_acceso(self, elemento, accion):
         pass
 
-  
+class Proxy(InterfazServicio):
+    def __init__(self):
+        self.usuario_autorizado= []
+        self.registros_acceso = {}
+
+    def agregar_usuario_autorizado(self, usuario):
+        self.usuario_autorizado.append(usuario)
+
+    def registrar_acceso(self, documento, accion):
+        ahora = datetime.now()
+        if documento.nombre not in self.registros_acceso:
+            self.registros_acceso[documento.nombre].append((accion, ahora))
+            
+    def get_registros_acceso(self, documento):
+        return self.registros_acceso.get(documento.nombre, [])
+    
+    def permitir_acceso(self, usuario, documento, accion):
+        if usuario in self.usuario_autorizado:
+            self.registrar_acceso(documento, accion)
+            print("Acceso permitido. Registros: ", self.get_registros_acceso(documento))
+            return True
+        else:
+            print("Acceso denegado")
+            return False
