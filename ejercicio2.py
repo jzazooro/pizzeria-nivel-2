@@ -60,7 +60,7 @@ class Carpeta(Elemento):
         for elemento in self.elementos:
             elemento.aceptar(usuario, accion, proxy)
 
-class InterfazUsuario:
+class InterfazServicio:
     def permitir_acceso(self, usuario, elemento, accion):
         pass
 
