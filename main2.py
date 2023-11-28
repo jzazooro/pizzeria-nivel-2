@@ -1,7 +1,7 @@
 import ejercicio2 as es
 
 def main():
-    documento1 = es.Documento("Informe1", "Texto", "Contenido confidencial...")
+    documento1 = es.Documento("Informe1", "Texto", 1024, "Contenido confidencial...")
     enlace1 = es.Enlace("Enlace1", "Enlace", 0)
     carpeta1 = es.Carpeta("Carpeta1")
     carpeta1.agregar_elementos(documento1)
