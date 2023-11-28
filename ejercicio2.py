@@ -32,5 +32,32 @@ class Documento(Elemento):
     def aceptar(self, usuario, accion, proxy):
         proxy.permitir_acceso(usuario, self, accion)
 
+class Enlace(Elemento):
+    def aceptar(self, usuario, accion, proxy):
+        proxy.permitir_acceso(usuario, self, accion)
+
 class Carpeta(Elemento):
+    def __init__(self, nombre):
+        super().__init__(nombre, "carpeta", 0)
+        self.elementos = []
+
+    def agregar_elementos(self, elemento):
+        self.elementos.append(elemento)
+
+    def eliminar_elementos(self, elemento):
+        self.elementos.remove(elemento)
+
+    def get_elementos(self, nombre):
+        for elemento in self.elementos:
+            if elemento.nombre() == nombre:
+                return elemento
+    
+    def get_tamaño():
+        return sum(elemento.tamaño for elemento in self.elementos)
+    
+    def aceptar(self, usuario, accion, proxy):
+        proxy.permitir_acceso(usuario, self, accion)
+        for elemento in self.elementos:
+            elemento.aceptar(usuario, accion, proxy)
+    
     
