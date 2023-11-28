@@ -32,3 +32,6 @@ def main():
     carpeta1.eliminar_elementos(enlace1)
     for i in range(len(carpeta1.elementos)):
         print(carpeta1.elementos[i].nombre)
+
+if __name__ == "__main__":
+    main()
